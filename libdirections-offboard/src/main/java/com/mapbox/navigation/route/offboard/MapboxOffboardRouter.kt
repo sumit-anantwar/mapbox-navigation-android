@@ -1,8 +1,8 @@
 package com.mapbox.navigation.route.offboard
 
 import android.content.Context
-import com.mapbox.annotation.navigation.module.MapboxNavigationModule
-import com.mapbox.annotation.navigation.module.MapboxNavigationModuleType
+import com.mapbox.annotation.module.MapboxModule
+import com.mapbox.annotation.module.MapboxModuleType
 import com.mapbox.api.directions.v5.MapboxDirections
 import com.mapbox.api.directions.v5.models.DirectionsResponse
 import com.mapbox.api.directions.v5.models.RouteOptions
@@ -20,7 +20,7 @@ import retrofit2.Response
  * @param accessToken mapboxAccessToken token
  * @param context application Context
  */
-@MapboxNavigationModule(MapboxNavigationModuleType.OffboardRouter, skipConfiguration = true)
+@MapboxModule(MapboxModuleType.NavigationOffboardRouter)
 class MapboxOffboardRouter(
     private val accessToken: String,
     private val context: Context,
