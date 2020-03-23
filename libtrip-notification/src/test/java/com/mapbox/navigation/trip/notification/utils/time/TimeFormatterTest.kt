@@ -165,7 +165,7 @@ class TimeFormatterTest {
     @Test
     fun formatTimeFormatTwentyFourHour() {
         val cal = GregorianCalendar().also {
-            it.timeInMillis = 1584746685675
+            it.set(2001, 1, 1, 16, 31, 0)
         }
 
         val result = TimeFormatter.formatTime(
@@ -175,6 +175,6 @@ class TimeFormatterTest {
             false
         )
 
-        Assert.assertEquals("16:31", result)
+        Assert.assertEquals("16:38", result)
     }
 }
