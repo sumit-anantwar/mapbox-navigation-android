@@ -142,7 +142,6 @@ class TimeFormatterTest {
         Assert.assertEquals("4:38 pm", result)
     }
 
-
     @Test
     fun formatTimeFormatTwelveHour() {
         val cal = GregorianCalendar().also {
