@@ -12,7 +12,6 @@ import java.util.GregorianCalendar
 import java.util.Locale
 import org.junit.Assert
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
@@ -111,11 +110,10 @@ class TimeFormatterTest {
         )
     }
 
-    @Ignore
     @Test
     fun formatTimeFormatNoneIsDeviceTwentyFourTrue() {
         val cal = GregorianCalendar().also {
-            it.timeInMillis = 1584746685675
+            it.set(2001, 1, 1, 16, 31, 0)
         }
 
         val result = TimeFormatter.formatTime(
@@ -125,14 +123,13 @@ class TimeFormatterTest {
             true
         )
 
-        Assert.assertEquals("16:31", result)
+        Assert.assertEquals("16:38", result)
     }
 
-    @Ignore
     @Test
     fun formatTimeFormatNoneIsDeviceTwentyFourFalse() {
         val cal = GregorianCalendar().also {
-            it.timeInMillis = 1584746685675
+            it.set(2001, 1, 1, 16, 31, 0)
         }
 
         val result = TimeFormatter.formatTime(
@@ -142,14 +139,14 @@ class TimeFormatterTest {
             false
         )
 
-        Assert.assertEquals("4:31 pm", result)
+        Assert.assertEquals("4:38 pm", result)
     }
 
-    @Ignore
+
     @Test
     fun formatTimeFormatTwelveHour() {
         val cal = GregorianCalendar().also {
-            it.timeInMillis = 1584746685675
+            it.set(2001, 1, 1, 16, 31, 0)
         }
 
         val result = TimeFormatter.formatTime(
@@ -159,7 +156,7 @@ class TimeFormatterTest {
             false
         )
 
-        Assert.assertEquals("4:31 pm", result)
+        Assert.assertEquals("4:38 pm", result)
     }
 
     @Test
