@@ -75,4 +75,13 @@
     <attr name="maneuverViewPrimaryColor" format="color"/>
     <attr name="maneuverViewSecondaryColor" format="color"/>
   </declare-styleable>
+
+  <declare-styleable name="InstructionView">
+    <attr name="instructionViewBackgroundColor" format="reference|color"/>
+    <attr name="instructionListViewBackgroundColor" format="reference|color"/>
+    <attr name="instructionViewPrimaryTextColor" format="reference|color"/>
+    <attr name="instructionViewSecondaryTextColor" format="reference|color"/>
+    <attr name="instructionManeuverViewPrimaryColor" format="reference|color"/>
+    <attr name="instructionManeuverViewSecondaryColor" format="reference|color"/>
+  </declare-styleable>
 </resources>
