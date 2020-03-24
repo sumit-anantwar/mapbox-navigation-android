@@ -10,6 +10,7 @@ import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.geometry.LatLngBounds;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
+import com.mapbox.navigation.base.trip.model.RouteProgressState;
 import com.mapbox.navigation.ui.legacy.NavigationConstants;
 import com.mapbox.navigation.base.trip.model.RouteProgress;
 
@@ -192,7 +193,8 @@ public class DynamicCamera extends SimpleCamera {
       || isNewStep(progress)
       || isLowAlert(progress)
       || isMediumAlert(progress)
-      || isHighAlert(progress);
+      || isHighAlert(progress)
+      || progress.currentState() == RouteProgressState.ROUTE_UNCERTAIN;
   }
 
   private boolean isLowAlert(RouteProgress progress) {
