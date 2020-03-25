@@ -1,6 +1,7 @@
 package com.mapbox.navigation.examples.core
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.location.Location
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -12,6 +13,8 @@ import android.view.View.VISIBLE
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.mapbox.android.core.location.LocationEngine
 import com.mapbox.android.core.location.LocationEngineCallback
@@ -34,6 +37,10 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback
 import com.mapbox.mapboxsdk.maps.Style
 import com.mapbox.mapboxsdk.plugins.annotation.SymbolManager
 import com.mapbox.mapboxsdk.plugins.annotation.SymbolOptions
+import com.mapbox.mapboxsdk.style.expressions.Expression.eq
+import com.mapbox.mapboxsdk.style.expressions.Expression.literal
+import com.mapbox.mapboxsdk.style.layers.CircleLayer
+import com.mapbox.mapboxsdk.style.layers.PropertyFactory
 import com.mapbox.navigation.base.extensions.applyDefaultParams
 import com.mapbox.navigation.base.extensions.coordinates
 import com.mapbox.navigation.base.options.NavigationOptions
@@ -200,6 +207,8 @@ class SimpleMapboxNavigationKt : AppCompatActivity(), OnMapReadyCallback,
             }
             symbolManager = SymbolManager(mapView, mapboxMap, style)
             style.addImage("marker", IconFactory.getInstance(this).defaultMarker().bitmap)
+            style.addImage("raw", ContextCompat.getDrawable(this, R.drawable.ic_circle_red)!!)
+            style.addImage("enhanced", ContextCompat.getDrawable(this, R.drawable.ic_circle_blue)!!)
 
             navigationMapboxMap = NavigationMapboxMap(mapView, mapboxMap)
             navigationMapboxMap.setCamera(DynamicCamera(mapboxMap))
@@ -253,6 +262,11 @@ class SimpleMapboxNavigationKt : AppCompatActivity(), OnMapReadyCallback,
 
     private val locationObserver = object : LocationObserver {
         override fun onRawLocationChanged(rawLocation: Location) {
+            symbolManager?.create(
+                    SymbolOptions()
+                            .withIconImage("raw")
+                            .withGeometry(rawLocation.toPoint())
+            )
             Timber.d("raw location %s", rawLocation.toString())
         }
 
@@ -260,6 +274,11 @@ class SimpleMapboxNavigationKt : AppCompatActivity(), OnMapReadyCallback,
             enhancedLocation: Location,
             keyPoints: List<Location>
         ) {
+            symbolManager?.create(
+                    SymbolOptions()
+                            .withIconImage("enhanced")
+                            .withGeometry(enhancedLocation.toPoint())
+            )
             if (keyPoints.isNotEmpty()) {
                 locationComponent?.forceLocationUpdate(keyPoints, true)
             } else {
